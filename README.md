@@ -110,7 +110,8 @@ java -jar api-auth-users-1.0.0.jar
 
 * ### **Diagrama funcional:**.
     * ##### Disponible en: \src\main\resources\diagram\
-  ![image](https://ibb.co/FzMwhFd)
+  ![image]([https://github.com/dvegas1/apit_auth_sp/assets/33332525/803935d2-40d9-4124-963a-a970d5f1ca6b](https://i.ibb.co/PgnhrdV/diagrama.png))
+  
 
 
 
