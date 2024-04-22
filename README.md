@@ -18,7 +18,7 @@ java -jar api-auth-users-1.0.0.jar
 ```
 
 ###### Otra opción: Desde un editor, en mi caso lo realicé en el editor Intellij IDEA si es así puedes solo darle clic a el run del proyecto ya que tiene configurado un perfil con el nombre start:
-![image](https://github.com/dvegas1/apit_auth_sp/assets/33332525/803935d2-40d9-4124-963a-a970d5f1ca6b)
+<img src="src/main/resources/img/run.png" alt="img">
 
 * ### **Request y Response:**.
   
@@ -110,7 +110,8 @@ java -jar api-auth-users-1.0.0.jar
 
 * ### **Diagrama funcional:**.
     * ##### Disponible en: \src\main\resources\diagram\
-  <img src="src/main/resources/diagram/diagrama.png" alt="img" >
+  <img src="src/main/resources/diagram/diagrama.png" alt="img">
+
 
   
   
