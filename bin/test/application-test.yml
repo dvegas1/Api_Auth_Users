@@ -1,0 +1,101 @@
+# Embedded Server configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /api-auth-users/v1
+  compression:
+    enabled: true
+  tomcat:
+    uri-encoding: UTF-8
+    accept-count: 500
+    threads:
+      max: 500
+  error:
+    include-stacktrace: never
+    include-message: always
+    include-binding-errors: always
+  # Jetty specific properties
+  jetty:
+    # Configure Jetty Http Post Request Size
+    max-http-form-post-size: 2000000
+    # Configure Jetty Request Idle Timeout
+    connection-idle-timeout: 3s
+    # Configure Jetty Maximum and Minimum Number of Threads
+    threads:
+      acceptors: 300
+      max: 500
+      min: 20
+      max-queue-capacity: 200
+
+# Spring configuration
+spring:
+  application:
+    name: api_auth
+    version: 1.0.0
+    log: /logs
+    h2:
+      console:
+        path: /h2-console
+  messages:
+    encoding: UTF-8
+  version: 2.7.1
+  main:
+    banner-mode: log
+  mvc:
+    converters:
+      preferred-json-mapper: jsonb
+  datasource:
+    url: 'jdbc:h2:mem:testdb'
+    username: usuariodb
+    password: usuariodb
+    driverClassName: org.h2.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maxLifetime: '30000'
+      useServerPrepStmts: true
+      prepStmtCacheSize: '512'
+      prepStmtCacheSqlLimit: '2048'
+      cachePrepStmts: true
+      poolName: HikariPool
+      maximumPoolSize: '50'
+      minimumIdle: '5'
+      auto-commit: true
+      idleTimeout: '5000'
+      connectionTimeout: '30000'
+  jpa:
+    properties:
+      hibernate:
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+        ddl-auto: create
+        insert-strategy: insert-order
+        jdbc:
+          batch_size: 100
+          fetch_size: 400
+
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    show-sql: true
+    database: h2
+
+# Logger Configuration
+logging:
+  level:
+    org.springframework.boot.autoconfigure: INFO
+    org.hibernate: ERROR
+    org.eclipse.jetty: INFO
+    root: INFO
+
+# Pod Configuration
+management:
+  info:
+    git:
+      enabled: true
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+hazelcastYmlPath: /u01/app/yaml/hazelcast.yml

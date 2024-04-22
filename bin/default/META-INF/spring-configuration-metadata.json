@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "app-configurations",
+      "type": ".microservices.components.configurations.AppSettingsExternalConfigurations",
+      "sourceType": ".microservices.components.configurations.AppSettingsExternalConfigurations"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app-configurations.api-novo-trans-orchestrator-hsm",
+      "type": ".microservices.components.configurations.ApiNovoTransOrchestratorHsm",
+      "sourceType": ".microservices.components.configurations.AppSettingsExternalConfigurations"
+    },
+    {
+      "name": "app-configurations.bin-version",
+      "type": ".microservices.components.configurations.BinVersion",
+      "sourceType": ".microservices.components.configurations.AppSettingsExternalConfigurations"
+    },
+    {
+      "name": "app-configurations.key-payload-encryption",
+      "type": "java.lang.String",
+      "sourceType": ".microservices.components.configurations.AppSettingsExternalConfigurations"
+    },
+    {
+      "name": "app-configurations.movements",
+      "type": ".microservices.components.configurations.Movements",
+      "sourceType": ".microservices.components.configurations.AppSettingsExternalConfigurations"
+    },
+    {
+      "name": "app-configurations.socket-novo-trans-change-pin-configuration",
+      "type": ".microservices.components.configurations.SocketNovoTransChangePinConfiguration",
+      "sourceType": ".microservices.components.configurations.AppSettingsExternalConfigurations"
+    },
+    {
+      "name": "app-configurations.socket-novo-trans-configuration",
+      "type": ".microservices.components.configurations.SocketNovoTransConfiguration",
+      "sourceType": ".microservices.components.configurations.AppSettingsExternalConfigurations"
+    }
+  ],
+  "hints": []
+}
