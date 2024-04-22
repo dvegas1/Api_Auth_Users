@@ -4,7 +4,7 @@ import com.microservices.components.enums.ResponseCode;
 import com.microservices.constants.ProcessConstants;
 import com.microservices.context.AppSessionContext;
 import com.microservices.controllers.contracts.IPodInfoController;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import com.microservices.dtos.commons.ApplicationInfo;
 import com.microservices.dtos.responses.ApplicationInfoBusinessResponseDto;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -32,7 +32,7 @@ public class PodInfoController implements IPodInfoController {
     private static final Logger LOGGER = LogManager.getLogger(PodInfoController.class);
 
     AppSessionContext appSessionContext;
-    ApiResponse businessResponse;
+    ApiBussinesResponse businessResponse;
 
     @Value("${spring.application.version:unknown}")
     String microserviceVersion;
@@ -45,7 +45,7 @@ public class PodInfoController implements IPodInfoController {
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
     public PodInfoController(AppSessionContext appSessionContext,
-                             ApiResponse businessResponse) {
+                             ApiBussinesResponse businessResponse) {
         this.appSessionContext = appSessionContext;
         this.businessResponse = businessResponse;
     }

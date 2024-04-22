@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.microservices.MicroservicesTestConfiguration;
 import com.microservices.context.AppSessionContext;
 import com.microservices.controllers.implementations.PodInfoController;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import com.microservices.dtos.messages.MessageResponseDto;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +37,7 @@ import java.util.Objects;
     classes = {
         PodInfoController.class,
         AppSessionContext.class,
-        ApiResponse.class
+        ApiBussinesResponse.class
     }
 )
 @Import(MicroservicesTestConfiguration.class)

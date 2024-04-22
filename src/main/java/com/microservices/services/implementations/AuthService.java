@@ -5,6 +5,7 @@ import com.microservices.components.helpers.JwtUtil;
 import com.microservices.constants.ManagementGeneralConstants;
 import com.microservices.dtos.commons.DetailsUserDto;
 import com.microservices.dtos.commons.StatusUser;
+import com.microservices.dtos.requests.PhoneRequest;
 import com.microservices.exceptions.InformationAuthException;
 import com.microservices.exceptions.ValidationErrors;
 import com.microservices.repository.contracts.PhoneRepository;
@@ -15,6 +16,7 @@ import com.microservices.repository.entities.PhonesEntity;
 import com.microservices.repository.entities.UserEntity;
 import com.microservices.services.contracts.IAuditService;
 import com.microservices.services.contracts.IAuthService;
+import com.microservices.services.validations.ValidateCreateUser;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,8 +70,11 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public StatusUser createUser(String name, String email, String password, ArrayList<UserPhonesDTO> phones) throws InformationAuthException, ParseException, ValidationErrors {
+    public StatusUser createUser(String name, String email, String password, ArrayList<PhoneRequest> phones) throws InformationAuthException, ParseException, ValidationErrors {
         LOGGER.info("Execute createUser");
+        ValidateCreateUser ValidateCreateUser =  new ValidateCreateUser();
+
+       // ValidateCreateUser.validPhoneUser(PhoneRequest);
 
         var searchEmail = userRepository.findByEmail(email).orElse(null);
 

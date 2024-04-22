@@ -2,10 +2,11 @@ package com.microservices.components.validations;
 
 
 import com.microservices.components.enums.ResponseCode;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import com.microservices.dtos.messages.GenericMessagesBusinessResponse;
 import com.microservices.dtos.messages.MessageBusinessResponse;
 import com.microservices.exceptions.ValidationErrors;
+import com.microservices.services.validations.ValidPhoneDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,11 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -29,10 +34,10 @@ import java.util.stream.Collectors;
 public class AppGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Autowired
-    ApiResponse businessResponse;
+    ApiBussinesResponse businessResponse;
 
     @Autowired
-    public AppGlobalExceptionHandler(ApiResponse businessResponse) {
+    public AppGlobalExceptionHandler(ApiBussinesResponse businessResponse) {
         this.businessResponse = businessResponse;
     }
 
@@ -88,6 +93,4 @@ public class AppGlobalExceptionHandler extends ResponseEntityExceptionHandler {
             ResponseCode.BAD_REQUEST.getResponseCodeValue()
         );
     }
-
-
 }

@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
  *
  * @author Darwin Vegas.
  * @author darwinvegas1@gmail.com
- * @since 9/8/2021
+ * @since 21/04/2024
  */
 @Data
 @AllArgsConstructor
@@ -64,6 +65,7 @@ public class CreateUserRequest implements Serializable {
         "Example: MyStr0ngP@$$w0rd")
     String password;
 
-    @ApiModelProperty(name = "phones", value = "Document Number for client.", example = "87654321")
-    ArrayList<UserPhonesDTO> phones;
+    @ApiModelProperty(name = "phones", value = "Phones to client.", example = "\"phones\":[{\"number\":\"1234567\",\"citycode\":\"1\",\"contrycode\":\"57\"},{\"number\":\"4242727712\",\"citycode\":\"2\",\"contrycode\":\"58\"},{\"number\":\"987654321\",\"citycode\":\"3\",\"contrycode\":\"51\"}]")
+    @Valid
+    ArrayList<PhoneRequest> phones;
 }

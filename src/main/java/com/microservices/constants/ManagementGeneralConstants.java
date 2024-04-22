@@ -21,8 +21,16 @@ public class ManagementGeneralConstants {
     public static final String USER_NOT_CREATE_CODE = "-601";
     public static final String USER_NOT_CREATE_MESSAGE = "Could not create user";
 
-    public static final String REQUIRE = " is required";
-    public static final String FIELD_NAME = "name";
-    public static final String FIELD_PHONES= "phone";
-    public static final String FIELD_EMAIL= "email";
+    public static final String NUMBER_PHONE_REGEX = "^\\d{1,16}$";
+    public static final String NUMBER_PHONE_MESSAGE = "The field number must contain only numeris and a minimum length of 7 and a maximum length of 16";
+
+    public static final String CITY_CODE_PHONE_REGEX = "^\\d{1,2}$";
+    public static final String CITY_CODE_PHONE_MESSAGE = "The field citycode must contain only numeris and a minimum length of 1 and a maximum length of 2";
+
+    public static final String COUNTRY_CODE_PHONE_REGEX = "^\\d{1,2}$";
+    public static final String COUNTRY_CODE_PHONE_MESSAGE = "The field contrycode must contain only numeris and a minimum length of 1 and a maximum length of 2";
+
+    public static final String FIELD_CITY_CODE = "name";
+    public static final String FIELD_PHONE_NUMBER= "number";
+    public static final String FIELD_CONTRY_CODE= "email";
 }

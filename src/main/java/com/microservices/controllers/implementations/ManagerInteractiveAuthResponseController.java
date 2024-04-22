@@ -3,7 +3,7 @@ package com.microservices.controllers.implementations;
 import com.microservices.components.enums.ResponseCode;
 import com.microservices.constants.ManagementGeneralConstants;
 import com.microservices.controllers.contracts.AuthResponseController;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import com.microservices.dtos.commons.StatusUser;
 import com.microservices.dtos.messages.GenericMessagesBusinessResponse;
 import com.microservices.dtos.messages.MessageBusinessResponse;
@@ -36,11 +36,11 @@ import java.util.List;
 @SuppressWarnings({ "java:S3457"})
 public class ManagerInteractiveAuthResponseController implements AuthResponseController {
     private static final Logger LOGGER = LogManager.getLogger(ManagerInteractiveAuthResponseController.class);
-    ApiResponse businessResponse;
+    ApiBussinesResponse businessResponse;
     IAuthService authService;
 
     @Autowired
-    public ManagerInteractiveAuthResponseController(ApiResponse businessResponse, IAuthService authService) {
+    public ManagerInteractiveAuthResponseController(ApiBussinesResponse businessResponse, IAuthService authService) {
         this.businessResponse = businessResponse;
         this.authService = authService;
     }
