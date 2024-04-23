@@ -20,6 +20,11 @@ java -jar api-auth-users-1.0.0.jar
 ###### Otra opción: Desde un editor, en mi caso lo realicé en el editor Intellij IDEA si es así puedes solo darle clic a el run del proyecto ya que tiene configurado un perfil con el nombre start:
 <img src="src/main/resources/img/run.png" alt="img">
 
+* ### **Ejecución de Test:**
+```sh
+gradle test --tests api-auth-users
+```
+
 * ### **Request y Response:**.
   
     *  ##### **Request**.
