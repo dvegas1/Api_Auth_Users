@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
@@ -31,13 +32,16 @@ import java.io.Serializable;
 public class PhoneRequest implements Serializable {
     @ApiModelProperty(name = "number", value = "number", example = "Juan Rodriguez")
     @Pattern(regexp = "^\\d{7,16}$", message = "The field number must contain only numeris and a minimum length of 7 and a maximum length of 16")
+    @NotBlank(message = "The number field cannot be empty")
     String number;
 
     @ApiModelProperty(name = "citycode", value = "citycode", example = "juan@rodriguez.org")
+    @NotBlank(message = "The citycode field cannot be empty")
     @Pattern(regexp = "^\\d{1,2}$", message = "The field citycode must contain only numeris and a minimum length of 1 and a maximum length of 2")
     String citycode;
 
     @ApiModelProperty(name = "contrycode", value = "contrycode", example = "Darwin.123+")
+    @NotBlank(message = "The contrycode field cannot be empty")
     @Pattern(regexp = "^\\d{1,2}$", message = "The field contrycode must contain only numeris and a minimum length of 1 and a maximum length of 2")
     String contrycode;
 }
