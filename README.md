@@ -117,6 +117,18 @@ gradle test --tests api-auth-users
     * ##### Disponible en: \src\main\resources\diagram\
   <img src="src/main/resources/diagram/diagrama.png" alt="img">
 
+* ### **Tecnologías usadas:**.
+	* Java 11+
+	* Spring Boot
+	* Lombok
+	* JUnit Framework
+	* Hamcrest
+	* AssertJ
+	* JsonPath
+	* Mockito
+	* IntelliJ IDEA
+	* Gradle
+
 
   
   
