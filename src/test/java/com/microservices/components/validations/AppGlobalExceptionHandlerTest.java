@@ -2,7 +2,7 @@ package com.microservices.components.validations;
 
 import com.microservices.MicroservicesTestConfiguration;
 import com.microservices.context.AppSessionContext;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ import java.util.Objects;
     loader = AnnotationConfigContextLoader.class,
     classes = {
         AppSessionContext.class,
-        ApiResponse.class
+        ApiBussinesResponse.class
     }
 )
 @Import(MicroservicesTestConfiguration.class)
@@ -39,7 +39,7 @@ import java.util.Objects;
 class AppGlobalExceptionHandlerTest {
 
     @Autowired
-    ApiResponse businessResponse;
+    ApiBussinesResponse businessResponse;
 
     WebRequest webRequest;
 

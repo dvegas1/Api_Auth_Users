@@ -3,7 +3,7 @@ package com.microservices;
 import com.microservices.components.configurations.MicroservicesConfigurer;
 import com.microservices.components.interceptors.AppLoggerInterceptor;
 import com.microservices.context.AppSessionContext;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -35,7 +35,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 @ContextConfiguration(initializers = ConfigDataApplicationContextInitializer.class,
     loader = AnnotationConfigContextLoader.class,
     classes = {
-        ApiResponse.class,
+        ApiBussinesResponse.class,
         AppLoggerInterceptor.class,
         AppSessionContext.class,
         MicroservicesConfigurer.class

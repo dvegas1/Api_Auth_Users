@@ -3,22 +3,17 @@ package com.microservices.controllers.implementations;
 import com.microservices.components.enums.ResponseCode;
 import com.microservices.constants.ManagementGeneralConstants;
 import com.microservices.controllers.contracts.AuthResponseController;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import com.microservices.dtos.commons.StatusUser;
-import com.microservices.dtos.messages.GenericMessagesBusinessResponse;
-import com.microservices.dtos.messages.MessageBusinessResponse;
 import com.microservices.dtos.requests.CreateUserRequest;
 import com.microservices.dtos.responses.UserResponse;
-import com.microservices.exceptions.ValidationErrors;
 import com.microservices.services.contracts.IAuthService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * AuthResponseController
@@ -36,11 +31,11 @@ import java.util.List;
 @SuppressWarnings({ "java:S3457"})
 public class ManagerInteractiveAuthResponseController implements AuthResponseController {
     private static final Logger LOGGER = LogManager.getLogger(ManagerInteractiveAuthResponseController.class);
-    ApiResponse businessResponse;
+    ApiBussinesResponse businessResponse;
     IAuthService authService;
 
     @Autowired
-    public ManagerInteractiveAuthResponseController(ApiResponse businessResponse, IAuthService authService) {
+    public ManagerInteractiveAuthResponseController(ApiBussinesResponse businessResponse, IAuthService authService) {
         this.businessResponse = businessResponse;
         this.authService = authService;
     }
@@ -59,9 +54,6 @@ public class ManagerInteractiveAuthResponseController implements AuthResponseCon
                 ).build(),
                 ResponseCode.PROCESS_OK.getResponseCodeValue()
             );
-        } catch (ValidationErrors val) {
-            LOGGER.error("006 Error ValidationErrors processing createUser ", val);
-            return responseToValidation(val.getMessage());
         } catch (Exception e) {
             LOGGER.error(Arrays.asList(e.getStackTrace()));
             LOGGER.error("002 Error in createUser  ", e);
@@ -75,17 +67,4 @@ public class ManagerInteractiveAuthResponseController implements AuthResponseCon
             LOGGER.info("Finish processing createUser");
         }
     }
-
-    public ResponseEntity<Object> responseToValidation(String msg) {
-        return businessResponse.getResponse(
-            GenericMessagesBusinessResponse.builder()
-                .messageBusinessResponse(MessageBusinessResponse.builder()
-                    .messagesBusiness(List.of(msg))
-                    .build())
-                .build(),
-            ResponseCode.BAD_REQUEST.getResponseCodeValue()
-        );
-    }
 }
-
-

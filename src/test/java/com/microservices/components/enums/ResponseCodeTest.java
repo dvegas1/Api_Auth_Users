@@ -6,7 +6,7 @@ import com.microservices.components.configurations.AppSettingsExternalConfigurat
 import com.microservices.components.configurations.AsyncConfig;
 import com.microservices.components.interceptors.AppLoggerInterceptor;
 import com.microservices.context.AppSessionContext;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import com.microservices.dtos.base.BaseBusinessResponseDto;
 import com.microservices.services.implementations.AuditService;
 import org.junit.jupiter.api.Assertions;
@@ -30,15 +30,15 @@ import java.util.Objects;
 @AutoConfigureMockMvc
 @TestPropertySource(properties = {"spring.config.location=classpath:application-test.yml"})
 @Import(MicroservicesTestConfiguration.class)
-@ContextConfiguration(initializers = ConfigDataApplicationContextInitializer.class, loader = AnnotationConfigContextLoader.class, classes = { AppSessionContext.class, ApiResponse.class, AppLoggerInterceptor.class, MicroservicesApplication.class, AppSettingsExternalConfigurations.class, AuditService.class, AsyncConfig.class
+@ContextConfiguration(initializers = ConfigDataApplicationContextInitializer.class, loader = AnnotationConfigContextLoader.class, classes = { AppSessionContext.class, ApiBussinesResponse.class, AppLoggerInterceptor.class, MicroservicesApplication.class, AppSettingsExternalConfigurations.class, AuditService.class, AsyncConfig.class
 })
 class ResponseCodeTest {
 
     Jsonb jsonb = JsonbBuilder.create();
-    ApiResponse businessResponse;
+    ApiBussinesResponse businessResponse;
 
     @Autowired
-    public ResponseCodeTest(ApiResponse businessResponse) {
+    public ResponseCodeTest(ApiBussinesResponse businessResponse) {
         this.businessResponse = businessResponse;
     }
 

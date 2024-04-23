@@ -6,7 +6,7 @@ import com.microservices.components.configurations.AppSettingsExternalConfigurat
 import com.microservices.components.configurations.AsyncConfig;
 import com.microservices.components.interceptors.AppLoggerInterceptor;
 import com.microservices.context.AppSessionContext;
-import com.microservices.dtos.base.ApiResponse;
+import com.microservices.dtos.base.ApiBussinesResponse;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Import(MicroservicesTestConfiguration.class)
-@ContextConfiguration(initializers = ConfigDataApplicationContextInitializer.class, loader = AnnotationConfigContextLoader.class, classes = { AppSessionContext.class, ApiResponse.class,AppLoggerInterceptor.class,  MicroservicesApplication.class,  AppSettingsExternalConfigurations.class,AsyncConfig.class})
+@ContextConfiguration(initializers = ConfigDataApplicationContextInitializer.class, loader = AnnotationConfigContextLoader.class, classes = { AppSessionContext.class, ApiBussinesResponse.class,AppLoggerInterceptor.class,  MicroservicesApplication.class,  AppSettingsExternalConfigurations.class,AsyncConfig.class})
 @TestPropertySource(properties = {"spring.config.location=classpath:application-test.yml"})
 @SuppressWarnings("squid:S5976")
 @Sql(scripts = {"/database/admcons_log.sql",}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)

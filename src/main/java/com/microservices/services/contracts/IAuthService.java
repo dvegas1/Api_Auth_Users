@@ -1,9 +1,8 @@
 package com.microservices.services.contracts;
 
 import com.microservices.dtos.commons.StatusUser;
+import com.microservices.dtos.requests.PhoneRequest;
 import com.microservices.exceptions.InformationAuthException;
-import com.microservices.exceptions.ValidationErrors;
-import com.microservices.repository.dto.UserPhonesDTO;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -22,5 +21,5 @@ import java.util.ArrayList;
  * @since 20/04/2024
  */
 public interface IAuthService {
-    StatusUser createUser(String name, String email, String password, ArrayList<UserPhonesDTO> listPhone) throws InformationAuthException, ParseException, ValidationErrors;
+    StatusUser createUser(String name, String email, String password, ArrayList<PhoneRequest> phones) throws InformationAuthException, ParseException;
 }

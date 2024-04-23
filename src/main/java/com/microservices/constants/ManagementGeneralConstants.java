@@ -21,8 +21,6 @@ public class ManagementGeneralConstants {
     public static final String USER_NOT_CREATE_CODE = "-601";
     public static final String USER_NOT_CREATE_MESSAGE = "Could not create user";
 
-    public static final String REQUIRE = " is required";
-    public static final String FIELD_NAME = "name";
-    public static final String FIELD_PHONES= "phone";
-    public static final String FIELD_EMAIL= "email";
+    public static final String NOT = "NO";
+    public static final String YES = "YES";
 }

@@ -88,16 +88,6 @@ public class MicroservicesConfigurer implements WebMvcConfigurer {
         this.beanFactory = beanFactory;
     }
 
-    public Docket apiDocket() {
-        return new Docket(DocumentationType.SWAGGER_2)
-            .select()
-            .apis(RequestHandlerSelectors.basePackage("com.microservices.controllers"))
-            .paths(PathSelectors.any())
-            .build()
-            .apiInfo(getApiInfo())
-            ;
-    }
-
     @Bean
     public static BeanPostProcessor springfoxHandlerProviderBeanPostProcessor() {
         return new BeanPostProcessor() {

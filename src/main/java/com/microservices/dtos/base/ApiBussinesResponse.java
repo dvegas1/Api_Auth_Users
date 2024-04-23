@@ -13,11 +13,12 @@ import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @Validated
-public class ApiResponse {
-    private static final Logger LOGGER = LogManager.getLogger(ApiResponse.class);
+public class ApiBussinesResponse {
+    private static final Logger LOGGER = LogManager.getLogger(ApiBussinesResponse.class);
 
     public ResponseEntity<Object> getResponse(@NotNull String codeMessageResponse) {
         return getResponse(BaseBusinessResponseDto.builder().build(), codeMessageResponse);
