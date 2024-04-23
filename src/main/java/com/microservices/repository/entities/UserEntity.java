@@ -1,5 +1,6 @@
 package com.microservices.repository.entities;
 
+import com.google.common.hash.Hashing;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.*;
 import org.checkerframework.common.aliasing.qual.Unique;
@@ -8,9 +9,11 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 @Entity
@@ -57,14 +60,20 @@ public class UserEntity {
     @Column(name = "last_login")
     private LocalDateTime last_login;
 
+    @NotBlank
+    @NotEmpty
+    @Column(name = "password", length = 200)
+    String password;
 
-    public UserEntity(String email, String name,boolean active) {
+    public UserEntity(String email, String name,boolean active,String password) {
         this.email = email;
         this.name = name;
         this.active = active;
+        this.password = password;
     }
 
     public UserEntity() {
 
     }
+
 }

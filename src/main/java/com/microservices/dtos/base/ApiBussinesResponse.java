@@ -2,7 +2,6 @@ package com.microservices.dtos.base;
 
 import com.microservices.dtos.messages.GenericMessagesBusinessResponse;
 import com.microservices.dtos.messages.MessageResponseDto;
-import com.microservices.services.validations.ValidPhoneDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,24 +62,4 @@ public class ApiBussinesResponse {
             return new ResponseEntity<>(bodyResponse, httpStatus);
         }
     }
-
-    public ResponseEntity<Object> getResponse(List<ValidPhoneDto> list, String codeMessageResponse) {
-        String bodyResponse = null;
-        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-        String msg = "null";
-        try {
-            try (Jsonb jsonb = JsonbBuilder.create()) {
-                msg = jsonb.toJson(list);
-            }
-
-            LOGGER.debug("Response: {}", bodyResponse);
-
-            return new ResponseEntity<>(msg, httpStatus);
-        } catch (Exception e1) {
-            LOGGER.error("Error general parsing object", e1);
-            return new ResponseEntity<>(msg, httpStatus);
-        }
-    }
-
-
 }

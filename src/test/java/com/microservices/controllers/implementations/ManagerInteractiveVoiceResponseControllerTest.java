@@ -4,7 +4,6 @@ package com.microservices.controllers.implementations;
 import com.microservices.MicroservicesTestConfiguration;
 import com.microservices.components.configurations.AppSettingsExternalConfigurations;
 import com.microservices.components.configurations.AsyncConfig;
-import com.microservices.components.enums.ResponseCode;
 import com.microservices.components.interceptors.AppLoggerInterceptor;
 import com.microservices.constants.ManagementGeneralConstants;
 import com.microservices.context.AppSessionContext;
@@ -12,14 +11,13 @@ import com.microservices.dtos.base.ApiBussinesResponse;
 import com.microservices.dtos.base.BaseBusinessResponseDto;
 import com.microservices.dtos.commons.DetailsUserDto;
 import com.microservices.dtos.commons.StatusUser;
-import com.microservices.dtos.messages.MessageResponseDto;
 import com.microservices.dtos.requests.CreateUserRequest;
-import com.microservices.dtos.responses.UserResponse;
-import com.microservices.repository.dto.UserPhonesDTO;
+import com.microservices.dtos.requests.PhoneRequest;
 import com.microservices.services.implementations.AuditService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -32,8 +30,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Description;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,9 +40,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import com.microservices.services.contracts.IAuthService;
 @DataJpaTest
@@ -68,7 +64,6 @@ class ManagerInteractiveVoiceResponseControllerTest {
     ManagerInteractiveAuthResponseController managerInteractiveAuthResponseController;
     @MockBean
     IAuthService iAuthService;
-
     @Mock
     IAuthService iAuthServiceMock;
     @Mock
@@ -119,6 +114,7 @@ class ManagerInteractiveVoiceResponseControllerTest {
     }
 
     @Test
+    @DisplayName("SUCESS CREATE USER")
     void createUserSucess() throws Exception {
         HttpStatus httpStatus = HttpStatus.OK;
         StatusUser statusUser = StatusUser.builder().user(
@@ -139,10 +135,17 @@ class ManagerInteractiveVoiceResponseControllerTest {
 
         Mockito.when(apiBussinesResponseMock.getResponse(Mockito.any(BaseBusinessResponseDto.class),Mockito.anyString())).thenReturn(new ResponseEntity<>(bodyResponse, httpStatus));
 
-        ArrayList<UserPhonesDTO> phones = new ArrayList<>();
-        phones.add(UserPhonesDTO.builder().number("123456").citycode("1").contrycode("12").build());
-        this.managerInteractiveAuthResponseControllerMock.createUser(CreateUserRequest.builder().name("darwin").email("test@dddd.com").phones(phones).build());
+        ArrayList<PhoneRequest> phones = new ArrayList<>();
+        phones.add(PhoneRequest.builder().number("123456").citycode("1").contrycode("12").build());
 
-        Assertions.assertTrue(true);
+        Assertions.assertDoesNotThrow(()->this.managerInteractiveAuthResponseControllerMock.createUser(CreateUserRequest.builder().name("darwin").email("test@dddd.com").phones(phones).build()));
+    }
+
+    @Test
+    @DisplayName("VALID EXEPTION CREATE USER")
+    void createUserAssertDoest()  {
+
+        ResponseEntity<Object> asd = this.managerInteractiveAuthResponseController.createUser(null);
+        Assertions.assertNull(this.managerInteractiveAuthResponseController.createUser(null));
     }
 }

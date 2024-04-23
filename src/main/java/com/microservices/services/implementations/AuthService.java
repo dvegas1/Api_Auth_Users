@@ -1,5 +1,6 @@
 package com.microservices.services.implementations;
 
+import com.google.common.hash.Hashing;
 import com.microservices.components.configurations.AppSettingsExternalConfigurations;
 import com.microservices.components.helpers.JwtUtil;
 import com.microservices.constants.ManagementGeneralConstants;
@@ -7,16 +8,13 @@ import com.microservices.dtos.commons.DetailsUserDto;
 import com.microservices.dtos.commons.StatusUser;
 import com.microservices.dtos.requests.PhoneRequest;
 import com.microservices.exceptions.InformationAuthException;
-import com.microservices.exceptions.ValidationErrors;
 import com.microservices.repository.contracts.PhoneRepository;
 import com.microservices.repository.contracts.UserRepository;
-import com.microservices.repository.dto.UserPhonesDTO;
 import com.microservices.repository.dto.UsersDTO;
 import com.microservices.repository.entities.PhonesEntity;
 import com.microservices.repository.entities.UserEntity;
 import com.microservices.services.contracts.IAuditService;
 import com.microservices.services.contracts.IAuthService;
-import com.microservices.services.validations.ValidateCreateUser;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,11 +69,8 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public StatusUser createUser(String name, String email, String password, ArrayList<PhoneRequest> phones) throws InformationAuthException, ParseException, ValidationErrors {
+    public StatusUser createUser(String name, String email, String password, ArrayList<PhoneRequest> phones) throws InformationAuthException, ParseException {
         LOGGER.info("Execute createUser");
-        ValidateCreateUser ValidateCreateUser =  new ValidateCreateUser();
-
-       // ValidateCreateUser.validPhoneUser(PhoneRequest);
 
         var searchEmail = userRepository.findByEmail(email).orElse(null);
 
@@ -84,7 +80,7 @@ public class AuthService implements IAuthService {
             return StatusUser.builder().message(ManagementGeneralConstants.EMAIL_FOUND_MESSAGE).code(ManagementGeneralConstants.EMAIL_FOUND_CODE).build();
         }
 
-        UserEntity createUserResponse = userRepository.save(UserEntity.builder().name(name).email(email).build());
+        UserEntity createUserResponse = userRepository.save(UserEntity.builder().name(name).email(email).password(encryptorsPassword(password)).build());
 
         if (Objects.isNull(createUserResponse)) {
             LOGGER.error("The User [{}]  not created", email);
@@ -106,11 +102,11 @@ public class AuthService implements IAuthService {
 
         UsersDTO finUser = new UsersDTO();
         List<Object[]> resultList = userRepository.findUser(createUserResponse.getId());
-        ArrayList<UserPhonesDTO> allPhonesUser = new ArrayList<>();
-        LOGGER.info("resultList:{}", resultList);
+        ArrayList<PhoneRequest> allPhonesUser = new ArrayList<>();
+
         if (!resultList.isEmpty()) {
             for (Object[] result : resultList) {
-                UserPhonesDTO userPhoneDto = new UserPhonesDTO();
+                PhoneRequest userPhoneDto = new PhoneRequest();
 
                 if (Objects.nonNull(result[0])) {
                     UserEntity user = (UserEntity) result[0];
@@ -129,12 +125,16 @@ public class AuthService implements IAuthService {
             }
         }
 
-
         String token = JwtUtil.generateToken(email);
 
         auditService.saveAdmconsLogAudit(email, CLIENTE, ManagementGeneralConstants.OPERATION_CREATEUSER, ManagementGeneralConstants.USER_CREATE_SUCESS_CODE, ManagementGeneralConstants.USER_CREATE_SUCESS_MESSAGE);
 
+        return StatusUser.builder().message(ManagementGeneralConstants.USER_CREATE_SUCESS_MESSAGE).code(ManagementGeneralConstants.USER_CREATE_SUCESS_CODE).user(DetailsUserDto.builder().id(finUser.getId().toString()).created(String.valueOf(finUser.getCreated())).modified(String.valueOf(finUser.getModified())).last_login(String.valueOf(finUser.getLast_login())).token(token).isactive((finUser.isActive()) ? ManagementGeneralConstants.YES : ManagementGeneralConstants.NOT).phones(allPhonesUser).build()).build();
+    }
 
-        return StatusUser.builder().message(ManagementGeneralConstants.USER_CREATE_SUCESS_MESSAGE).code(ManagementGeneralConstants.USER_CREATE_SUCESS_CODE).user(DetailsUserDto.builder().id(finUser.getId().toString()).created(String.valueOf(finUser.getCreated())).modified(String.valueOf(finUser.getModified())).last_login(String.valueOf(finUser.getLast_login())).token(token).isactive((finUser.isActive()) ? "YES" : "NO").phones(allPhonesUser).build()).build();
+    private String encryptorsPassword(String password){
+        return Hashing.sha256()
+            .hashString(password, StandardCharsets.UTF_8)
+            .toString();
     }
 }

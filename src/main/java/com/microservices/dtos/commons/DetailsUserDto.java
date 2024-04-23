@@ -1,6 +1,6 @@
 package com.microservices.dtos.commons;
 
-import com.microservices.repository.dto.UserPhonesDTO;
+import com.microservices.dtos.requests.PhoneRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,5 +29,5 @@ public class DetailsUserDto {
     String last_login;
     String token;
     String isactive;
-    ArrayList<UserPhonesDTO> phones;
+    ArrayList<PhoneRequest> phones;
 }
