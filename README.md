@@ -107,6 +107,11 @@ java -jar api-auth-users-1.0.0.jar
     Hibernate: create table phones (id integer not null, citycode varchar(255), contrycode varchar(255) not null, id_user varchar(255) not null, number varchar(255) not null, primary key (id))
     Hibernate: create table users (id varchar(32) not null, active boolean, created timestamp, email varchar(100) not null, last_login timestamp, modified timestamp, name varchar(100) not null, primary key (id))
     ```
+* ### **Swagger - Post Request:**.
+  <img src="src/main/resources/img/post_request_creatUser.png" alt="img">
+
+* ### **Swagger - Post Request:**.
+  <img src="src/main/resources/img/post_response_creatUser.png" alt="img">
 
 * ### **Diagrama funcional:**.
     * ##### Disponible en: \src\main\resources\diagram\
