@@ -112,10 +112,12 @@ gradle test --tests api-auth-users
     Hibernate: create table phones (id integer not null, citycode varchar(255), contrycode varchar(255) not null, id_user varchar(255) not null, number varchar(255) not null, primary key (id))
     Hibernate: create table users (id varchar(32) not null, active boolean, created timestamp, email varchar(100) not null, last_login timestamp, modified timestamp, name varchar(100) not null, primary key (id))
     ```
-* ### **Swagger - Post Request:**.
+* ### **Swagger:**
+  ###### /api-auth-users/v1/swagger-ui/index.html
+  * ### **Swagger - Post Request:**.
   <img src="src/main/resources/img/post_request_creatUser.png" alt="img">
-
-* ### **Swagger - Post Request:**.
+  
+  * ### **Swagger - Post Request:**.
   <img src="src/main/resources/img/post_response_creatUser.png" alt="img">
 
 * ### **Diagrama funcional:**.
@@ -126,6 +128,7 @@ gradle test --tests api-auth-users
 	* Java 11+
 	* Spring Boot
 	* Lombok
+    * Swagger
 	* JUnit Framework
 	* Hamcrest
 	* AssertJ
