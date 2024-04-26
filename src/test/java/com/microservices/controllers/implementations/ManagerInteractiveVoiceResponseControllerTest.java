@@ -13,11 +13,11 @@ import com.microservices.dtos.commons.DetailsUserDto;
 import com.microservices.dtos.commons.StatusUser;
 import com.microservices.dtos.requests.CreateUserRequest;
 import com.microservices.dtos.requests.PhoneRequest;
+import com.microservices.services.contracts.IAuthService;
 import com.microservices.services.implementations.AuditService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -31,18 +31,17 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Description;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-import com.microservices.services.contracts.IAuthService;
 @DataJpaTest
 @AutoConfigureMockMvc
 @Import(MicroservicesTestConfiguration.class)

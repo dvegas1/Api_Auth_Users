@@ -1,5 +1,7 @@
 package com.microservices;
 
+import com.microservices.components.configurations.MicroservicesConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -18,12 +20,19 @@ import org.springframework.cache.annotation.EnableCaching;
  */
 @SpringBootApplication(
     scanBasePackages = {
+        "com.microservices.controllers",
+        "com.microservices.controllers.contracts",
+        "com.microservices.dtos.base",
         "com.microservices.components.helpers",
         "com.microservices",
     }
 )
 @EnableCaching
 public class MicroservicesApplication {
+
+    @Autowired
+    private MicroservicesConfigurer microservicesConfigurer;
+
     public static void main(String[] args) {
         SpringApplication.run(MicroservicesApplication.class, args);
     }

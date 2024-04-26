@@ -13,13 +13,11 @@ import com.microservices.dtos.requests.PhoneRequest;
 import com.microservices.exceptions.InformationAuthException;
 import com.microservices.repository.contracts.PhoneRepository;
 import com.microservices.repository.contracts.UserRepository;
-import com.microservices.repository.entities.UserEntity;
 import com.microservices.services.contracts.IAuditService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockserver.configuration.ConfigurationProperties;
 import org.mockserver.integration.ClientAndServer;
@@ -37,8 +35,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
-import static org.mockito.Mockito.times;
 @DataJpaTest
 @AutoConfigureMockMvc
 @Import(MicroservicesTestConfiguration.class)

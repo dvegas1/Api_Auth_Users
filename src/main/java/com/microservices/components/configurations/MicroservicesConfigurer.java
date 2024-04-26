@@ -18,6 +18,7 @@ import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,14 +44,11 @@ import springfox.documentation.spring.web.plugins.WebFluxRequestHandlerProvider;
 import springfox.documentation.spring.web.plugins.WebMvcRequestHandlerProvider;
 import springfox.documentation.swagger.web.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 
 import java.lang.reflect.Field;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
 
 /**
  * MicroservicesConfigurer
@@ -178,7 +176,7 @@ public class MicroservicesConfigurer implements WebMvcConfigurer {
     public Docket microserviceApi() {
         return new Docket(DocumentationType.SWAGGER_2)
             .groupName("microservice-api")
-            .useDefaultResponseMessages(false)
+            .useDefaultResponseMessages(true)
             .additionalModels(
                 typeResolver.resolve(BaseBusinessResponseDto.class),
                 typeResolver.resolve(ApplicationInfoBusinessResponseDto.class),
@@ -190,26 +188,13 @@ public class MicroservicesConfigurer implements WebMvcConfigurer {
             .apiInfo(apiInfo())
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.microservices.controllers"))
+            .paths(PathSelectors.any())
             .build()
             .ignoredParameterTypes(ApiIgnore.class)
             .tags(
                 new Tag(CategoryRestConstants.CATEGORY_INTERACTIVE_RESPONSE_MANAGEMENT, CategoryRestConstants.CATEGORY_BUSINESS_DESCRIPTION)
             );
     }
-
-    private ApiInfo getApiInfo() {
-        return new ApiInfo(
-            "Order Service API",
-            "Order Service API Description",
-            "1.0",
-            "http://codmind.com/terms",
-            new Contact("Codmind", "https://codmind.com", "apis@codmind.com"),
-            "LICENSE",
-            "LICENSE URL",
-            Collections.emptyList()
-        );
-    }
-
     @Bean
     @SuppressWarnings({"java:S1611"})
     MeterRegistryCustomizer<MeterRegistry> configurer(@Value("${spring.application.name}") String applicationName) {

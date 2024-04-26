@@ -1,6 +1,5 @@
 package com.microservices.repository.entities;
 
-import com.google.common.hash.Hashing;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.*;
 import org.checkerframework.common.aliasing.qual.Unique;
@@ -13,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 @Entity

@@ -214,6 +214,7 @@ dependencyManagement {
 }
 
 dependencies {
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.8.0'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.12.5'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
     runtimeOnly 'com.h2database:h2'
@@ -277,8 +278,10 @@ dependencies {
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.4.1'
     testImplementation 'com.jparams:to-string-verifier:1.4.8'
     testImplementation 'com.h2database:h2'
+    testImplementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webflux-api', version: '2.5.0'
     testImplementation(group: 'org.mock-server', name: 'mockserver-junit-jupiter', version: '5.11.2') {
         exclude group: 'jakarta.validation', module: 'jakarta.validation-api'
+
     }
 }
 
