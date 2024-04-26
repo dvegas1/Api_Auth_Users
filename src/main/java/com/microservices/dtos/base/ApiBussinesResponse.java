@@ -13,7 +13,6 @@ import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Component
 @Validated

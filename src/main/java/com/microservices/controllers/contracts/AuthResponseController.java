@@ -7,6 +7,7 @@ import com.microservices.dtos.responses.UserResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,7 +19,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -35,11 +35,12 @@ import javax.validation.constraints.NotNull;
  * @since 10/04/2021
  */
 
-@Api(value = "/", tags = {CategoryRestConstants.CATEGORY_INTERACTIVE_RESPONSE_MANAGEMENT}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+@Api(value = "", tags = {CategoryRestConstants.CATEGORY_INTERACTIVE_RESPONSE_MANAGEMENT}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 @RequestMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public interface AuthResponseController {
     @PostMapping(path = "/auth/createUser")
+    @ApiOperation(value = "Create Users")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = UserResponse.class))),
         @ApiResponse(responseCode = "400", description = "Custom business error", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = BaseBusinessResponseDto.class))),
