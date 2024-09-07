@@ -1,5 +1,5 @@
 # Api Auth -  Create User
-##### Esta API permite el registro de usuarios y validar el registro en la respuesta de la petici.
+##### Esta API permite el registro de usuarios y validar el registro en la respuesta de la petición.
     
 * ### **Compilar y ejecutar proyecto:**.
 1. Compilar
